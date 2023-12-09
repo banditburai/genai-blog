@@ -1,0 +1,22 @@
+---
+import ButtonBar from "./Buttonbar.astro"
+import ButtonTag from "./Buttontag.astro"
+---
+
+<footer>
+  <div>
+    <small class="p-2">
+      Copyright &copy; <span id="copyright"></span> | All rights reserved
+    </small>
+  </div>
+  <!-- <ButtonBar>
+    {tags.map((tag) => <ButtonTag>{tag}</ButtonTag>)}
+  </ButtonBar> -->
+</footer>
+
+<script>
+let copyrightElement = document.querySelector("#copyright");
+if (copyrightElement) {
+  copyrightElement.textContent = new Date().getFullYear().toString();
+}
+</script>

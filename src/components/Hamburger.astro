@@ -1,0 +1,54 @@
+---
+
+
+---
+
+<!-- Hamburger icon -->
+<div class="hamburger">
+<span class="hamburger-line"></span>
+<span class="hamburger-line"></span>
+<span class="hamburger-line"></span>
+</div>
+<style>
+    /* Styles for the hamburger menu */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+    }
+  
+    .hamburger-line {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: black;
+      transition: transform 0.3s ease-in-out;
+    }
+  
+    .hamburger.open .hamburger-line:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+  
+    .hamburger.open .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .hamburger.open .hamburger-line:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      #menu {
+        transform: translateX(-100%);
+      }
+  
+      #menu.flex {
+        transform: translateX(0);
+      }
+    }
+  </style>
+
