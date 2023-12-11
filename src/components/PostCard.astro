@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+import { getEntry, type CollectionEntry } from "astro:content";
+import Link from "./Link.astro";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+import { slugify, formatDate } from "../utils/blogutils";
+
+const { post } = Astro.props;
+
+const { author, description, title, date, cover, category, tags } = post.data;
+
+const { data: authorData } = await getEntry("team", author.id);
+---
+
+<article class="post-card bg-white shadow-lg rounded-lg overflow-hidden">
+  <small>
+    <a href={`/category/${slugify(category)}/`} class="badge">{category}</a>
+  </small>
+</article>
+
+<a href={`/posts/${post.slug}`} aria-hidden="true">
+  <Image
+    src={cover.src}
+    alt={cover.alt}
+    width="400"
+    height="250"
+    format="webp"
+    quality={80}
+  />
+</a>
+<div class="content">
+  <div>
+    <a href={`/posts/${post.slug}`}>{title}</a>
+    <small>
+      by <a href={`/author/${slugify(authorData.name)}/`}>{authorData.name}</a> • {
+        formatDate(date)
+      }
+    </small>
+  </div>
+</div>
+<p>{description}</p>
+<Link
+  href={`/posts/${post.slug}`}
+  text="Read Post"
+  classes="skeuomorphic"
+  style="secondary"
+/>
+
+<style>
+  .badge {
+    /* Example styles for the badge class */
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    margin: 0.5em 0;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0.25em;
+    font-size: 0.8em;
+    text-decoration: none;
+  }
+</style>

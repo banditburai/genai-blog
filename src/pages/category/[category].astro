@@ -1,0 +1,41 @@
+---
+// component imports
+import MainLayout from "../../layouts/MainLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+// utils
+import { slugify, formatBlogPosts } from "../../utils/blogutils";
+
+const { category } = Astro.params;
+const {name} = Astro.props;
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+  const categories = new Set(allPosts.map(post => post.data.category).filter(Boolean));
+  const paths = Array.from(categories).map(category => ({
+    params: { category: slugify(category) },
+    props: { name: category },
+  }));
+  
+  return paths;
+}
+
+const allPosts = await getCollection("posts");
+const formattedPosts = formatBlogPosts(allPosts);
+const catPosts = formattedPosts.filter(
+  (post) => slugify(post.data.category) === category
+);
+
+---
+
+<MainLayout title={category}>
+  <section class="container" aria-label={`Posts about ${category}`}>
+    <h1 class="h1">Posts about <span>{name}</span></h1>
+    <div class="post-container">
+      {
+        catPosts.map((post) => (
+          <PostCard post = {post}/>
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>

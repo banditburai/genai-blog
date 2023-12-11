@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+import { slugify } from "../../utils/blogutils";
+
+const { author } = Astro.params;
+const { name } = Astro.props;
+
+export async function getStaticPaths() {    
+    const team = await getCollection("team");        
+    const paths = team.map(member => ({
+        params: { author: slugify(member.id) },
+        props: { name: member.data.name },
+    }));
+
+    return paths;
+}
+
+const allPosts = await getCollection("posts");
+const authorPosts = allPosts.filter(post => post.data.author.id === author);
+
+---
+
+<MainLayout title={`Posts by ${author}`}>
+  <section class="container" aria-label={`Posts by ${name}`}>
+    <h1 class="h1">Posts by <span>{name}</span></h1>
+    <div class="post-container">
+      {
+        authorPosts.map((post) => (
+          <PostCard post={post}/>
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>
+
+

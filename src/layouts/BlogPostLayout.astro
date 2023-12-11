@@ -1,0 +1,58 @@
+---
+// component import
+import { getCollection } from "astro:content";
+import PostHeader from "../components/PostHeader.astro";
+import CategoryCloud from "../components/CategoryCloud.astro";
+import MainLayout from "./MainLayout.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
+
+// util imports
+import { formatBlogPosts } from "../utils/blogutils";
+const { frontmatter } = Astro.props;
+if (!frontmatter) {
+  console.warn('No frontmatter provided to BlogPostLayout');
+  return;
+}
+const { title, description, date, category, author, cover } = frontmatter;
+
+const allPosts = await getCollection('posts');
+const formattedPosts = formatBlogPosts(allPosts, {
+  sortByDate: false,
+});
+const relatedPosts = formattedPosts
+  .filter(
+    (post) =>
+      post.data.category.toLowerCase() === category.toLowerCase() &&
+      post.data.title !== title
+  )
+  .slice(0, 3);
+---
+
+<MainLayout
+  {title}
+  {description}
+  image={frontmatter.image}
+  {frontmatter}
+  robots={frontmatter.robots}
+>
+  <PostHeader {title} {description} {date} {category} {cover} {author} />
+  <div class="post-content">
+    <div class="content">
+      <slot />
+    </div>
+    <div class="sidebar">
+      <aside class="container" aria-label="Blog categories">
+        <h2 class="h3">Blog Categories</h2>
+        <CategoryCloud />
+      </aside>
+      {
+        relatedPosts.length > 0 && (
+          <aside class="container" aria-label="Related posts">
+            <h2 class="h3">Related Posts</h2>
+            <RelatedPosts {relatedPosts} />
+          </aside>
+        )
+      }
+    </div>
+  </div>
+</MainLayout>
