@@ -21,7 +21,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 const { data: authorData } = await getEntry("team", entry.data.author.id);
 
-const relatedPosts = entry.data.relatedPosts
+const relatedPosts = Array.isArray(entry.data.relatedPosts)
   ? await getEntries(entry.data.relatedPosts)
   : [];
 ---

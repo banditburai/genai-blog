@@ -1,7 +1,7 @@
 ---
 import { slugify, formatDate } from "../utils/blogutils";
 
-const { relatedPosts } = Astro.props;
+const { relatedPosts = [] } = Astro.props;
 ---
 
 {
@@ -11,8 +11,8 @@ const { relatedPosts } = Astro.props;
         <a href={post.url}>{post.data.title}</a>
       </h3>
       <small>
-        <a href={`/author/${slugify(post.data.author)}/`}>
-          {post.data.author}
+        <a href={`/author/${slugify(post.data.author.id)}/`}>
+          {post.data.author.id}
         </a>{" "}
         • {formatDate(post.data.date)}
       </small>

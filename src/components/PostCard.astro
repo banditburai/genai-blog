@@ -17,7 +17,7 @@ const { data: authorData } = await getEntry("team", author.id);
 
 <article class="post-card bg-white shadow-lg rounded-lg overflow-hidden">
   <small>
-    <a href={`/category/${slugify(category)}/`} class="badge">{category}</a>
+    <a href={`/category/${slugify(category)}/`} class="badge bg-blue-500 text-white rounded px-2 py-1 uppercase tracking-wide text-xs no-underline">{category}</a>
   </small>
 </article>
 
@@ -49,7 +49,7 @@ const { data: authorData } = await getEntry("team", author.id);
   style="secondary"
 />
 
-<style>
+<!-- <style>
   .badge {
     /* Example styles for the badge class */
     display: inline-block;
@@ -61,4 +61,4 @@ const { data: authorData } = await getEntry("team", author.id);
     font-size: 0.8em;
     text-decoration: none;
   }
-</style>
+</style> -->
