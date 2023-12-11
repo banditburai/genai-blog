@@ -1,5 +1,13 @@
 /* global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer components {
+  .badge {
+    @apply bg-blue-500 text-white rounded-full px-2 py-1 uppercase tracking-wide text-xs;
+  }
+}
   
   /* Theme toggle container and buttons */
   .theme-toggle-container {
