@@ -19,7 +19,6 @@ type Props = {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { data: authorData } = await getEntry("team", entry.data.author.id);
 
 const relatedPosts = Array.isArray(entry.data.relatedPosts)
   ? await getEntries(entry.data.relatedPosts)
@@ -27,19 +26,7 @@ const relatedPosts = Array.isArray(entry.data.relatedPosts)
 ---
 
 <MarkdownPostLayout frontmatter={entry.data}>
-  <div class="meta">
-    <Image src={authorData.headshot} alt={authorData.name} width="25" />
-    <p>{authorData.name}</p>
-    <span>•</span>
-    <time datetime={entry.data.date.toISOString()}
-      >{
-        entry.data.date.toLocaleDateString(undefined, {
-          dateStyle: "medium",
-          timeZone: "UTC",
-        })
-      }</time
-    >
-  </div>
+
   <Content />
   {
     relatedPosts.length > 0 && (
