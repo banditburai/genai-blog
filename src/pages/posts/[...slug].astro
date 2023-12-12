@@ -1,8 +1,7 @@
 ---
 import { getCollection, type CollectionEntry, getEntry } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
-import { Image } from "astro:assets";
-import PostCard from "../../components/PostCard.astro";
+import Comments from "../../components/Comments.astro";
 import { getEntries } from "astro:content";
 
 export async function getStaticPaths() {
@@ -28,5 +27,5 @@ const relatedPosts = Array.isArray(entry.data.relatedPosts)
 <MarkdownPostLayout frontmatter={entry.data}>
 
   <Content />
-
+<Comments />
 </MarkdownPostLayout>
