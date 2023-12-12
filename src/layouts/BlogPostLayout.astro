@@ -7,13 +7,14 @@ import RelatedPosts from "../components/RelatedPosts.astro";
 
 // util imports
 import { formatBlogPosts } from "../utils/blogutils";
+import TagCloud from "../components/TagCloud.astro";
 const { frontmatter } = Astro.props;
 
 if (!frontmatter) {
   console.warn('No frontmatter provided to BlogPostLayout');
   return;
 }
-const { title, description, date, category, author, cover } = frontmatter;
+const { title, description, date, category, author, cover, tags} = frontmatter;
 
 const allPosts = await getCollection('posts');
 const formattedPosts = formatBlogPosts(allPosts, {
@@ -43,14 +44,15 @@ if (related.length === 0) {
 
   <PostHeader {title} {description} {date} {category} {cover} {author} />
 
-  <div class="post-content md:flex md:justify-between md:items-start">
+  <div class="post-content md:flex md:justify-center md:items-start">
     <div class="content text-gray-800 dark:text-gray-300 mx-4 my-6 md:flex-1 prose prose-sm sm:prose lg:prose-lg xl:prose-2xl dark:prose-dark">
       <slot />
+      <TagCloud {tags}/>
     </div>
     <div class="sidebar md:w-1/4">
       <aside class="container flex flex-wrap justify-start space-y-8" aria-label="Blog categories">
         <h2 class="h3 bold title text-2xl mt-6 mx-2 ">Blog Categories</h2>
-        <CategoryCloud class="flex flex-wrap mx-4 gap-1 my-1 justify-center" />
+        <CategoryCloud class="flex flex-wrap mx-4 gap-1 my-1 justify-start" />
       </aside>
       {
         relatedPosts.length > 0 && (
