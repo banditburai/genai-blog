@@ -28,16 +28,5 @@ const relatedPosts = Array.isArray(entry.data.relatedPosts)
 <MarkdownPostLayout frontmatter={entry.data}>
 
   <Content />
-  {
-    relatedPosts.length > 0 && (
-      <div class="post-wrapper">
-        <h2>Related Posts</h2>
-        <div>
-          {relatedPosts.map((p) => (
-            <PostCard post={p} />
-          ))}
-        </div>
-      </div>
-    )
-  }
+
 </MarkdownPostLayout>

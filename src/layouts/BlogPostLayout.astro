@@ -19,33 +19,44 @@ const allPosts = await getCollection('posts');
 const formattedPosts = formatBlogPosts(allPosts, {
   sortByDate: false,
 });
-const related = formattedPosts
-  .filter(
-    (post) =>
-      post.data.category.toLowerCase() === category.toLowerCase() &&
-      post.data.title !== title
-  )
-  .slice(0, 3);
-  const relatedPosts = related.length ? related : [];
 
+let related = [];
+if (frontmatter.relatedPosts) {
+  related = formattedPosts
+    .filter((post) => frontmatter.relatedPosts.includes(post.slug))
+    .slice(0, 3);
+}
+
+
+if (related.length === 0) {
+  related = formattedPosts
+    .filter(
+      (post) =>
+        post.data.category.toLowerCase() === category.toLowerCase() &&
+        post.data.title !== title
+    )
+    .slice(0, 3);
+}
+  const relatedPosts = related.length ? related : [];
+  
 ---
 
   <PostHeader {title} {description} {date} {category} {cover} {author} />
 
-  <div class="post-content md:flex md:justify-between md:items-start md:space-x-8">
-    <div class="content md:w-2/3">
+  <div class="post-content md:flex md:justify-between md:items-start">
+    <div class="content text-gray-800 dark:text-gray-300 mx-4 my-6 md:flex-1 prose prose-sm sm:prose lg:prose-lg xl:prose-2xl dark:prose-dark">
       <slot />
     </div>
-    <div class="sidebar">
-      <aside class="container md:w-1/3 space-y-8" aria-label="Blog categories">
-        <h2 class="h3">Blog Categories</h2>
-        <CategoryCloud />
+    <div class="sidebar md:w-1/4">
+      <aside class="container flex flex-wrap justify-start space-y-8" aria-label="Blog categories">
+        <h2 class="h3 bold title text-2xl mt-6 mx-2 ">Blog Categories</h2>
+        <CategoryCloud class="flex flex-wrap mx-4 gap-1 my-1 justify-center" />
       </aside>
       {
         relatedPosts.length > 0 && (
-          <aside class="container" aria-label="Related posts">
-            <h2 class="h3">Related Posts</h2>
-            <RelatedPosts posts={relatedPosts} />
+          <aside class="container" aria-label="Related posts">            
+            <h2 class="h3 bold text-2xl mx-2 my-4 flex title">Related Posts</h2>
+            <RelatedPosts {relatedPosts}/>
           </aside>
         )
       }

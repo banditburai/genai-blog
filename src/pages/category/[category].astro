@@ -28,9 +28,9 @@ const catPosts = formattedPosts.filter(
 ---
 
 <MainLayout title={category}>
-  <section class="container" aria-label={`Posts about ${category}`}>
-    <h1 class="h1">Posts about <span>{name}</span></h1>
-    <div class="post-container">
+  <section class="container mx-auto py-4" aria-label={`Posts about ${category}`}>
+    <h1 class="h1 text-gray-800 dark:text-gray-100 text-5xl font-bold mb-4">Posts about <span>{name}</span></h1>
+    <div class="post-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {
         catPosts.map((post) => (
           <PostCard post = {post}/>

@@ -5,10 +5,30 @@
 
 @layer components {
   .badge {
-    @apply bg-blue-500 text-white rounded-full px-2 py-1 uppercase tracking-wide text-xs;
+    @apply bg-blue-500 text-white rounded px-2 py-2 uppercase tracking-wide text-xs;
   }
+
 }
-  
+
+@layer utilities{
+  /* Typography for blog post content */
+.prose-content {
+  @apply prose prose-sm sm:prose lg:prose-lg xl:prose-xl;
+  /* Customize with your color preferences */
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+/* Typography for titles and headings */
+.title {
+  @apply text-2xl font-bold leading-tight text-gray-800 dark:text-white;
+}
+
+/* Typography for metadata like author and date */
+.meta-data {
+  @apply text-sm text-gray-500 dark:text-gray-400;
+}
+
+}  
   /* Theme toggle container and buttons */
   .theme-toggle-container {
     display: flex;
@@ -44,7 +64,7 @@
       inset 0 6px 6px rgba(0, 0, 0, 0.1),
       inset 0 10px 10px rgba(0, 0, 0, 0.05);    
         background-image: linear-gradient(to top, theme('colors.gradient-light'), theme('colors.gradient-middle') 50%, theme('colors.gradient-dark'));    
-    border: 1px solid #a1a4fe;
+    border: 2px solid #a1a4fe;
     
     /* Additional styles for interaction */
     transition: all 0.3s ease;

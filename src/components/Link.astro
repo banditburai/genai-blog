@@ -27,19 +27,19 @@ const {
 } = Astro.props as Props;
 
 const filledStyles = {
-  primary: 'bg-primary text-white',
-  secondary: 'bg-secondary text-white',
+  primary: 'bg-primary text-white dark:bg-primary-dark dark:text-gray-200',
+  secondary: 'bg-secondary text-white dark:bg-secondary-dark dark:text-gray-200',
 };
 
 const borderStyles = {
-  primary: 'border border-primary',
-  secondary: 'border border-secondary',
+  primary: 'border border-primary dark:border-primary-dark rounded-full border-3',
+  secondary: 'border border-secondary dark:border-secondary-dark border-3',
 };
 
 // Combine the base styles with the ones conditional on props
 const linkClasses = [
   'link',
-  'inline-flex items-center justify-center px-4 py-2 rounded-full',  
+  'inline-flex items-center justify-center px-4 py-2 rounded-lg',  
   classes, // Additional classes from the `classes` prop
   isFilled ? filledStyles[style] : '', // Conditionally add filled styles
   borderVisible ? borderStyles[style] : '', // Conditionally add border styles

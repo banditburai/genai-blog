@@ -4,33 +4,45 @@ import { getCollection } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
 import PostCard from "../components/PostCard.astro";
 import Link from "../components/Link.astro";
+import { Image } from "astro:assets";
 
 const allPosts = await getCollection("posts");
 
 ---
 
-<MainLayout title="My Blog">
-  <section class="container about" aria-label="About Me">
-	<img
-	src="/images/steamingmug.png"
-	alt="Intro image"
-	class="rounded-full w-96 h-96 md:w-auto md:h-auto md:justify-self-end"
-  />
-    <div class="content">
-      <h1 class="h1">My Blog</h1>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quidem
-        tempora beatae mollitia architecto optio sapiente repellendus natus.
-      </p>
-      <Link href="/about/" style="secondary" text="👋 About Me" />
+<MainLayout title="Gen Ai Harbor">
+  <section class="container mx-auto py-4" aria-label="About Me">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+      <img
+        src="/images/steamingmug.png"
+        alt="Intro image"
+        class="rounded-full w-96 h-96 md:w-auto md:h-auto md:justify-self-end"
+      />
+      <div class="content">
+        <h1 class="h1 text-gray-800 dark:text-gray-100 text-5xl font-bold mb-4">Gen Ai Harbor</h1>
+        <p class="prose text-gray-800 dark:text-gray-300 mb-2">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam quidem
+          tempora beatae mollitia architecto optio sapiente repellendus natus.
+        </p>
+        <Link href="/about/" style="primary" text="👋 About Me" />
+      </div>
     </div>
   </section>
   
   <!-- Home page New blog listings -->
-  <section class="container" aria-label="New Blog Posts">
-    <h2 class="h1 text-3xl font-bold mb-6">New Blog Posts</h2>
-    <div class="post-container">    
-		<div>{allPosts.slice(0, 3).map((p) => <PostCard post={p} />)}</div>              
+  <section class="container mx-auto py-4" aria-label="New Blog Posts">
+    <h2 class="h1 text-gray-800 dark:text-gray-100 text-3xl font-bold mb-6">New Blog Posts</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {
+        allPosts.slice(0, 4).map((p) => (
+          <PostCard post={p} key={p.slug} />
+        ))
+      }
     </div>
+    {allPosts.length > 3 && (
+      <div class="text-center mt-8">
+        <Link href="/blog/" style="secondary" text="See more posts" />
+      </div>
+    )}
   </section>
 </MainLayout>

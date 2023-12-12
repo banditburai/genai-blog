@@ -5,8 +5,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#1c0172", // Example for a primary color (purple-700)
-        secondary: "#4f46e5",
+        primary: {
+          DEFAULT: '#9a9cfc', // purple
+          dark: '#a0a3ff', // darker pru
+        },
+        secondary: {
+          DEFAULT: '#0a91b1', // example color
+          dark: '#5eb9de', // darker variant for dark mode
+        },
         "gradient-light": "#b0b3ff",
         "gradient-middle": "#a0a3ff",
         "gradient-dark": "#9093ff",
@@ -20,7 +26,9 @@ export default {
       // You can also add boxShadow, borderRadius, etc., here if needed.
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
   // ...
 };
 
