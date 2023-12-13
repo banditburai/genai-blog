@@ -7,16 +7,15 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postbuild": "pagefind --source dist/",
+    "pagefind": "astro build && npm run postbuild && astro preview"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
     "@astrojs/mdx": "^2.0.0",
-    "@astrojs/react": "^3.0.7",
     "@astrojs/svelte": "^5.0.0",
     "@astrojs/tailwind": "^5.0.3",
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
     "astro": "^4.0.3",
     "astro-icon": "^0.8.2",
     "limax": "^4.1.0",
@@ -29,6 +28,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash.merge": "^4.6.9",
     "@types/node": "^20.10.4",
+    "pagefind": "^1.0.4",
     "stylelint": "^16.0.2",
     "stylelint-config-recommended": "^14.0.0",
     "stylelint-config-tailwindcss": "^0.0.7"

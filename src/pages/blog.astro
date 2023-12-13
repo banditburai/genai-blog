@@ -3,16 +3,17 @@
 import { getCollection } from "astro:content";
 import CategoryCloud from "../components/CategoryCloud.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import Pagination from "../components/Pagination.astro";
 import PostCard from "../components/PostCard.astro";
 
 // Fetch the first set of posts for the initial blog page
 const posts = await getCollection("posts");
-const pageSize = 2; // Adjust as needed
+const pageSize = 4; // Adjust as needed
 const firstPagePosts = posts.slice(0, pageSize);
 ---
 
 <!-- Styles get overwritten -->
-<MainLayout>
+<!-- <MainLayout>
     <section class="container" aria-label="New Blog Posts">   
         <div class="post-container">
     {
@@ -25,4 +26,24 @@ const firstPagePosts = posts.slice(0, pageSize);
     <h2>Blog Categories</h2>
     <CategoryCloud showCount={true}/>
   </aside>  
+</MainLayout> -->
+<MainLayout>
+  <!-- Styled section for blog posts -->
+  <section class="container mx-auto py-4" aria-label="New Blog Posts">
+    <h1 class="h1 text-gray-800 dark:text-gray-100 text-5xl font-bold mb-4">New Blog Posts</h1>
+    <div class="post-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {
+        firstPagePosts.map((post) => <PostCard post={post} />)
+      }
+    </div>
+  </section>
+
+  <!-- Pagination and Category Cloud -->
+  <div class="flex flex-col items-center">
+    <!-- Since this is the first page, you might not need pagination here, but it's included for consistency -->
+    <Pagination currentPage={1} totalPages={Math.ceil(posts.length / pageSize)} prevUrl={null} nextUrl={"/blog/2"} />
+    
+    <h2 class="h3 title mt-6 mb-2 text-center">Blog Categories</h2>
+    <CategoryCloud class="flex flex-wrap justify-center gap-2 mb-6" showCount={true} />
+  </div>
 </MainLayout>

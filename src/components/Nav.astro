@@ -4,9 +4,13 @@ import routes from '../utils/routes.json'
 import Link from './Link.astro';
 import ThemeToggleButton from './ThemeToggleButton.svelte';
 import Hamburger from './Hamburger.astro';
+import SearchModal from './SearchModal.svelte';
+
 
 const currentPath = Astro.url.pathname; 
+
 const isActiveLink = (path) => currentPath === path;
+
 ---
 
 <nav aria-label="Primary" class="bg-cyan-600 text-white dark:bg-slate-600">
@@ -14,7 +18,7 @@ const isActiveLink = (path) => currentPath === path;
     <a href="/" class="logomark" aria-label="Go home">      
       <Icon name="logomark" width="60" />
     </a>
-    <button id="menu-btn" class="hamburger md:hidden focus:outline-none" type="button">
+    <button type="button" id="menu-btn" class="hamburger md:hidden focus:outline-none" type="button">
       <Hamburger/>
     </button>
     <div id="menu" class="nav-links-container hidden md:flex flex-col md:flex-row items-center">
@@ -27,12 +31,20 @@ const isActiveLink = (path) => currentPath === path;
           classes={`data-nav-link nav-link ${isActiveLink(path) ? 'nav-link-active' : ''}`}
         />
       ))}
+  <div class="search-button-container">
+    <SearchModal client:load />
+  </div>
       <div class="theme-toggle-container">
         <ThemeToggleButton client:load />
       </div>
+
     </div>
   </div>
 </nav>
+
+
+
+
 
 <script>
   // Function to initialize or reinitialize the hamburger menu
@@ -48,7 +60,7 @@ const isActiveLink = (path) => currentPath === path;
       function handleMenuToggle() {
         menu.classList.toggle('hidden');
         menu.classList.toggle('flex'); 
-        btn.querySelector('.hamburger').classList.toggle('open');
+        btn.querySelector('.hamburger').classList.toggle('open');zx
       }
 
       btn.addEventListener('click', handleMenuToggle);
@@ -57,8 +69,9 @@ const isActiveLink = (path) => currentPath === path;
 
   initHamburgerMenu();
 
-  // Reinitialize on page navigation
   document.addEventListener('astro:after-swap', initHamburgerMenu);
+
+  
 </script>
 
 
@@ -115,8 +128,9 @@ const isActiveLink = (path) => currentPath === path;
   }
 
   .theme-toggle-container {
-    width: 75px;
-  }
+     width: 10px;               
+    }
+
   @media (max-width: 768px) {
     .nav-links-container {
       /* Apply background, padding, and flex properties to display the menu */
@@ -139,12 +153,12 @@ const isActiveLink = (path) => currentPath === path;
       position: absolute;
       left: 0;
       bottom: 0;
+      width: 60px;      
       padding-bottom: 1.5rem;
     }
   }
   .nav-link-active{
     text-decoration: underline;
   }
-
-  
+ 
 </style>
