@@ -17,7 +17,14 @@ export interface Post {
       src: string;
       alt: string;
     };
-    author: string; // assuming the reference to 'team' resolves to a string
+    author: {
+      id: string;
+      name: string;
+      bio: string;
+      email: string;
+      role: "Software" | "Design" | "Marketing";
+      headshot: any; // Replace 'any' with the actual type of 'headshot'
+    };
     category: string;
     tags?: string[];
     relatedPosts?: string[]; // assuming the reference to 'posts' resolves to an array of strings
@@ -26,7 +33,7 @@ export interface Post {
 }
 
 export interface MetaData {
-  title?: string;
+  title?: string | undefined;
   ignoreTitleTemplate?: boolean;
 
   canonical?: string;

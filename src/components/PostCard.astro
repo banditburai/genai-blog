@@ -10,7 +10,7 @@ import { slugify, formatDate } from "../utils/blogutils";
 
 const { post } = Astro.props;
 
-const { author, description, title, date, cover, category, tags } = post.data;
+const { author, description, title, date, cover, category } = post.data;
 
 const { data: authorData } = await getEntry("team", author.id);
 ---

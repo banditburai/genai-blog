@@ -1,5 +1,5 @@
 
-export function slugify(text) {    
+export function slugify(text: string) {    
     if (!text) {
         return '';
       }
@@ -13,7 +13,7 @@ export function slugify(text) {
       .replace(/-+$/, '');
   }
   
-  export function formatDate(date) {
+  export function formatDate(date: Date) {
     return new Date(date).toLocaleDateString('en-US', {
       timeZone: "UTC",
     })

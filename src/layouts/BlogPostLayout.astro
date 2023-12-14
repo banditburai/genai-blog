@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import PostHeader from "../components/PostHeader.astro";
 import CategoryCloud from "../components/CategoryCloud.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
+import type { Post } from '../types.d.ts';
 
 // util imports
 import { formatBlogPosts } from "../utils/blogutils";
@@ -24,7 +25,7 @@ const formattedPosts = formatBlogPosts(allPosts, {
 let related = [];
 if (frontmatter.relatedPosts) {
   related = formattedPosts
-    .filter((post) => frontmatter.relatedPosts.includes(post.slug))
+    .filter((post: Post) => frontmatter.relatedPosts.includes(post.slug))
     .slice(0, 3);
 }
 
@@ -32,7 +33,7 @@ if (frontmatter.relatedPosts) {
 if (related.length === 0) {
   related = formattedPosts
     .filter(
-      (post) =>
+      (post: Post) =>
         post.data.category.toLowerCase() === category.toLowerCase() &&
         post.data.title !== title
     )

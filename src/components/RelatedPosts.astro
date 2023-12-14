@@ -1,23 +1,36 @@
 ---
 import { slugify, formatDate } from "../utils/blogutils";
 import { getEntry} from "astro:content"
+import type { Post } from '../types.d.ts';
 
-const { relatedPosts = [], class: className } = Astro.props;
+const { relatedPosts = [] } = Astro.props;
+
+interface ExtendedPost extends Post {
+  authorData: {
+    name: string;
+    id: string;    
+    bio: string;
+    email: string;
+    role: "Software" | "Design" | "Marketing";
+    headshot: any;
+  };
+}
+
 for (const post of relatedPosts) {
   const { data: authorData } = await getEntry("team", post.data.author.id);
-  post.data.authorData = authorData;
+  post.authorData = authorData;
 }
 ---
 <div class="flex flex-col justify-start mx-4">
 {
-  relatedPosts.map((post) => (
+  relatedPosts.map((post: ExtendedPost) => (
   <a class="dark:text-white" href={`/posts/${post.slug}`} class="block">    
     <div class="related-post bg-slate-300 dark:bg-black rounded-lg p-4 shadow mb-2">       
       <h3 class="h4">{post.data.title}</h3>        
 
       <small class="dark:text-white" >
         <a class="hover:bg-indigo-400" href={`/author/${slugify(post.data.author.id)}/`}>
-          {post.data.authorData.name}
+          {post.authorData.name}
         </a>{" "}
         • {formatDate(post.data.date)}
       </small>
