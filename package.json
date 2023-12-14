@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && npm run postbuild",
     "preview": "astro preview",
     "astro": "astro",
-    "postbuild": "pagefind --source dist/",
+    "postbuild": "pagefind --site dist --glob 'posts/**/*'",
     "pagefind": "astro build && npm run postbuild && astro preview"
   },
   "dependencies": {
