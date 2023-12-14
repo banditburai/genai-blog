@@ -2,7 +2,7 @@
 // src/pages/tags/[tag].astro
 import MainLayout from "../../layouts/MainLayout.astro";
 import PostCard from "../../components/PostCard.astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { slugify, formatBlogPosts } from "../../utils/blogutils";
 
 export async function getStaticPaths() {
@@ -22,7 +22,7 @@ const formattedPosts = formatBlogPosts(tagPosts);
   <section class="container mx-auto py-4" aria-label={`Posts tagged with #'${tag}'`}>
     <h1 class="h1 text-gray-800 dark:text-gray-100 text-5xl font-bold mb-4">Posts tagged with #<span>{tag}</span></h1>
     <div class="post-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {formattedPosts.map(post => (
+      {formattedPosts.map((post: CollectionEntry<"posts">) => (
         <PostCard post={post}/>
       ))}
     </div>

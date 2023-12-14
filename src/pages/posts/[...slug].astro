@@ -1,8 +1,7 @@
 ---
-import { getCollection, type CollectionEntry, getEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
 import Comments from "../../components/Comments.astro";
-import { getEntries } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -19,9 +18,6 @@ type Props = {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const relatedPosts = Array.isArray(entry.data.relatedPosts)
-  ? await getEntries(entry.data.relatedPosts)
-  : [];
 ---
 
 <MarkdownPostLayout frontmatter={entry.data}>

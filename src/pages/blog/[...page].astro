@@ -6,23 +6,15 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import PostCard from "../../components/PostCard.astro";
 import Pagination from "../../components/Pagination.astro";
 import type { CollectionEntry } from 'astro:content';
+import type { PaginateFunction } from 'astro';
 
-interface PageType {
-  data: CollectionEntry<"posts">[];
-  currentPage?: number;
-  lastPage?: number;
-  url?: {
-    prev?: string;
-    next?: string;
-  };
-}
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
   const allPosts = await getCollection("posts");
   return paginate(allPosts, { pageSize: 4 });
 }
 
-const { page }: { page: PageType } = Astro.props;
+const { page } = Astro.props;
 ---
 
 <!-- Change styles here -->
