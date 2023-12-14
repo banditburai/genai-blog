@@ -39,7 +39,7 @@ const firstPagePosts = posts.slice(0, pageSize);
   </section>
 
   <!-- Pagination and Category Cloud -->
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center ">
     <!-- Since this is the first page, you might not need pagination here, but it's included for consistency -->
     <Pagination currentPage={1} totalPages={Math.ceil(posts.length / pageSize)} prevUrl={null} nextUrl={"/blog/2"} />
     
