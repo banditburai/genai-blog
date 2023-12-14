@@ -12,7 +12,7 @@
       showModal = false;
       dialog.close();
     } else {
-      dialog.style.maxWidth = window.innerWidth < 768 ? '90%' : '45em';
+      dialog.style.maxWidth = window.innerWidth < 768 ? '90%' : '50em';
     }
   }
 
