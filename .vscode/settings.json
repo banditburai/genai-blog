@@ -1,0 +1,9 @@
+{
+    "markdownlint.config": {
+      "MD042": false, 
+      "no-hard-tabs": false  
+    },
+    "markdownlint.ignore": [
+      
+    ]
+  }

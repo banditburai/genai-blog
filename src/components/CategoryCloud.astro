@@ -1,14 +1,15 @@
 ---
 import { getCollection } from "astro:content";
 import { formatBlogPosts, slugify } from "../utils/blogutils"
+import type { Post } from '../types.d.ts';
 
 const allPosts = await getCollection("posts");
 const formattedPosts = formatBlogPosts(allPosts);
 const allCategories = formattedPosts
-  .map((post) => post.data && post.data.category ? post.data.category.toLowerCase() : '')
-  .filter(category => category !== ''); 
+  .map((post: Post) => post.data && post.data.category ? post.data.category.toLowerCase() : '')
+  .filter((category: string) => category !== ''); 
 
-const processedCats = allCategories.reduce((acc, category) => {
+  const processedCats = allCategories.reduce((acc: { [key: string]: number }, category: string) => {
   // check if the category exists in the acc
   const value = acc[category] || 0;
 
