@@ -36,10 +36,6 @@ const allPosts = await getCollection("posts");
 
  
   <!-- search section for testing -->
-  <button onclick="throw new Error('This is a test error')">
-    Throw test error
-  </button>
-
   
   <!-- Home page New blog listings -->
   <section class="container mx-auto py-4" aria-label="New Blog Posts">
@@ -56,5 +52,10 @@ const allPosts = await getCollection("posts");
         <Link href="/blog/" style="secondary" text="See more posts" />
       </div>
     )}
+
+<script>
+  import "../utils/sentry-init.js";
+</script>
+
   </section>
 </MainLayout>
