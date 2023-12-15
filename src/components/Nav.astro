@@ -6,9 +6,12 @@ import ThemeToggleButton from "./ThemeToggleButton.svelte";
 import Hamburger from "./Hamburger.astro";
 import SearchModal from "./SearchModal.svelte";
 
-const currentPath = Astro.url.pathname;
+// const currentPath = Astro.url.pathname;
 
-const isActiveLink = (path: string) => currentPath === path;
+// const isActiveLink = (path: string) => currentPath === path;
+
+const { pathname: currentPath } = Astro.url;
+const isActiveLink = (href: string) => href === currentPath || href === currentPath.replace(/\/$/, '');
 ---
 
 <nav aria-label="Primary" class="bg-cyan-600 text-white dark:bg-slate-600">
