@@ -5,6 +5,8 @@ import PostHeader from "../components/PostHeader.astro";
 import CategoryCloud from "../components/CategoryCloud.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
 import type { Post } from '../types.d.ts';
+import Prose from "../components/Prose.astro";
+import Icon from "astro-icon";
 
 // util imports
 import { formatBlogPosts } from "../utils/blogutils";
@@ -43,12 +45,16 @@ if (related.length === 0) {
   
 ---
 
+
+
   <PostHeader {title} {description} {date} {category} {cover} {author} />
 
-  <div class="post-content md:flex md:justify-center md:items-start">
-    <div class="content text-gray-800 dark:text-gray-300 mx-4 my-6 md:flex-1 prose prose-sm sm:prose lg:prose-lg xl:prose-2xl dark:prose-dark">
+  <div class="post-content md:flex md:justify-center">
+    <div class="content mx-4 my-6">      
+      <Prose>
       <slot />
-      <TagCloud {tags}/>
+    </Prose>
+      <TagCloud {tags}/>    
     </div>
     <div class="sidebar md:w-1/4">
       <aside class="container flex flex-wrap justify-start space-y-8" aria-label="Blog categories">
@@ -65,3 +71,4 @@ if (related.length === 0) {
       }
     </div>
   </div>
+

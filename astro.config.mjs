@@ -4,17 +4,18 @@ import mdx from "@astrojs/mdx";
 import svelte from "@astrojs/svelte";
 import sentry from "@sentry/astro";
 import partytown from "@astrojs/partytown";
-
 import sitemap from "@astrojs/sitemap";
+
+import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://genai-blog.vercel.app/',
-  integrations: [tailwind(), mdx(), svelte(), sentry({
+  integrations: [tailwind(), expressiveCode(), mdx(), svelte(), sentry({
     dsn: "https://ae18d6deff77e66b880cbf009a4d015e@o4506305828290560.ingest.sentry.io/4506396468641792",
     sourceMapsUploadOptions: {
       project: "genai-blog",
       authToken: process.env.SENTRY_AUTH_TOKEN
     }
-  }), partytown(), sitemap()]
+  }), partytown(), sitemap() ]
 });

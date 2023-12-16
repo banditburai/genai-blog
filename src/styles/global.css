@@ -90,3 +90,71 @@
       padding: 1.5rem; 
     }
   }
+
+  .starlight-aside {
+    padding: 10px;
+    margin: 16px 0;
+    border-left: 6px solid;
+    background: #f7f7f7;
+  }
+  
+  /* Title style for all asides */
+  .starlight-aside__title {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  /* Icon style for all asides */
+  .starlight-aside__icon {
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  
+  /* Styles for note variant */
+  .starlight-aside--note {
+    border-color: #007bff;
+    background-color: rgba(64, 35, 78, .8);  
+  }
+  .starlight-aside--note .starlight-aside__title {
+    color: #bdc3ff;
+  }
+  .starlight-aside--note p {
+    color: #ffffff;
+  }
+
+  /* Styles for tip variant */
+  .starlight-aside--tip {
+    border-color: #bd54ee;
+    background-color: rgba(64, 35, 78, .8);    
+    
+  }
+  .starlight-aside--tip .starlight-aside__title {
+    color: #e9caf8;
+  }
+  .starlight-aside--tip p {
+    color: #ffffff;
+  }
+
+  /* Styles for caution variant */
+  .starlight-aside--caution {
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+  .starlight-aside--caution .starlight-aside__title {
+    color: #e9caf8;
+  }
+  .starlight-aside--caution p {
+    color: #ffffff;
+  }
+
+  /* Styles for danger variant */
+  .starlight-aside--danger {
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+  .starlight-aside--danger .starlight-aside__title {
+    color: #e9caf8;
+  }
+  .starlight-aside--danger p {
+    color: #ffffff;
+  }

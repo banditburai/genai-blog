@@ -1,0 +1,19 @@
+---
+ import { Image } from 'astro:assets';
+
+interface Props {
+   imagePath: string;
+   altText: string;
+   prompt?: string;
+   model?: string;
+}
+
+const { imagePath, altText, prompt, model } = Astro.props;
+const images = import.meta.glob('/src/assets/images/*.{jpeg,jpg,png,gif}')
+
+---
+<div class="card">
+   <h2>{prompt}</h2>
+   <p>Model: {model}</p>
+   <Image src={images[imagePath]()} alt={altText} />
+</div>
